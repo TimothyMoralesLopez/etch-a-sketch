@@ -26,20 +26,20 @@ function createGrid(dimensions) {
     for (let i = 0; i < dimensionsSquared; i++) {
         const myDiv = document.createElement("div");
         myDiv.style.flex = "1 1 " + myBasis;
-        myDiv.addEventListener("mouseover", () => {
+        myDiv.addEventListener("mouseover", (e) => {
             myDiv.style.backgroundColor = generateRandomColor();
+            if (e.target.style.opacity != 1) {
+                e.target.style.opacity = Number(e.target.style.opacity) + 0.1; 
+            }
         });
-        myDiv.addEventListener("mouseout", () => {
-            myDiv.style.backgroundColor = "white"; 
-        }); 
         myContainer.appendChild(myDiv); 
     }
 }
 
 myButton.addEventListener("click", () => {
-    let userInput = prompt("Please enter a number between 1 and 100"); 
+    let userInput = prompt("Please enter a number from 1 to 100."); 
     while (userInput > 100 || userInput < 1) {
-        userInput = prompt("That number is not within range. Please try again"); 
+        userInput = prompt("That number is not within range. Please try again."); 
     }
     createGrid(userInput); 
 }); 
