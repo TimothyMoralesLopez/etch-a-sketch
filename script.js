@@ -1,6 +1,22 @@
 const myContainer = document.querySelector(".container");
 const myButton = document.querySelector(".gridButton"); 
 
+function generateRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateRandomColor() {
+    let randomColor = "#"; 
+    let colorCodeArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+
+    for (let i = 0; i < 6; i++) {
+        const randomNum = generateRandomNum(0, colorCodeArr.length - 1); 
+        randomColor += colorCodeArr[randomNum]; 
+    }
+
+    return randomColor; 
+}
+
 function createGrid(dimensions) {
 
     myContainer.textContent = ""; 
@@ -11,12 +27,10 @@ function createGrid(dimensions) {
         const myDiv = document.createElement("div");
         myDiv.style.flex = "1 1 " + myBasis;
         myDiv.addEventListener("mouseover", () => {
-            myDiv.classList.add("overDiv");
-            myDiv.classList.remove("outDiv"); 
+            myDiv.style.backgroundColor = generateRandomColor();
         });
         myDiv.addEventListener("mouseout", () => {
-            myDiv.classList.add("outDiv");
-            myDiv.classList.remove("overDiv"); 
+            myDiv.style.backgroundColor = "white"; 
         }); 
         myContainer.appendChild(myDiv); 
     }
